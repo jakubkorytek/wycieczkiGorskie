@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+</head>
+<body style="background-color: #636464">
+<div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="https://cdn.pixabay.com/photo/2013/07/12/18/41/boots-153705_960_720.png" width="50px" height="50px">
+    <a class="navbar-brand" href="/">Wycieczki</a>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" th:href="@{/Wycieczki/ListaWycieczek}">Lista Wycieczek</a></li>
+    </div>
+    <div class="nav navbar-nav ml-auto">
+        <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/signUp"><span class="glyphicon glyphicon-użytkownik"></span> Zarejestruj</a></li>
+        <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+        <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
+    </div>
+
+</nav>
+</div>
+<div>
+    <table class="table table-light">
+        <tr style="background-color: #5c636a; border-color: #6c757d; border-style: solid">
+            <th scope="col">ID</th>
+            <th scope="col">Start</th>
+            <th scope="col">Meta</th>
+            <th scope="col">Miejscowosc</th>
+            <th scope="col">Data</th>
+            <th scope="col">liczbaDni</th>
+            <th scope="col">liczbaKilometrow</th>
+            <th sec:authorize="hasRole('ROLE_user')" scope="col">Szczegóły</th>
+
+
+
+        </tr>
+        <tr th:each="wycieczka : ${data}" style="border-color: #6c757d; border-style: solid">
+            <th scope="row" th:text="${wycieczka.idWycieczki}"></th>
+            <th th:text="${wycieczka.start}"></th>
+            <th th:text="${wycieczka.meta}"></th>
+            <th th:text="${wycieczka.miejscowosc}"></th>
+            <th th:text="${wycieczka.dataWycieczki}"></th>
+            <th th:text="${wycieczka.liczbaDni}">
+            <th th:text="${wycieczka.liczbaKilometrow}"></th>
+
+            <th sec:authorize="hasRole('ROLE_user')">
+                <a th:href="@{/Wycieczki/{id}(id=${wycieczka.idWycieczki})}"  th:if="${wycieczka.idUzytkownika==user.IdUser}">
+                    <button >Szczegóły</button>
+                </a>
+            </th>
+        </tr>
+    </table>
+    <div class="d-flex justify-content-center align-items-center container">
+        <a sec:authorize="hasRole('ROLE_user')" class="btn bg-dark text-light btn-group-vertical" th:href="@{/Wycieczki/DodajWycieczke}">Dodaj Wycieczke</a></li>
+    </div>
+
+</div>
+
+</body>
+<footer>
+    <p style="text-align: center">Pozdrawiam i polecam, Jakub Korytek</p>
+</footer>
+</html>

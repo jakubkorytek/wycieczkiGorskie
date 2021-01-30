@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Dodaj wycieczke</title>
+    <style>
+        div.field {
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: #636464">
+<div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="https://cdn.pixabay.com/photo/2013/07/12/18/41/boots-153705_960_720.png" width="50px" height="50px">
+    <a class="navbar-brand" href="/">Wycieczki</a>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" th:href="@{/Wycieczki/ListaWycieczek}">Lista Wycieczek</a></li>
+    </div>
+    <div class="nav navbar-nav ml-auto">
+        <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/signUp"><span class="glyphicon glyphicon-użytkownik"></span> Zarejestruj</a></li>
+        <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+        <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
+    </div>
+
+</nav>
+</div>
+<div class="container">
+    <form method="POST" action="/Wycieczki/DodajWycieczke" th:obcject="${wycieczka}">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <label for="start">Start</label>
+                <input type="text" class="form-control" id="start" th:field="*{Wycieczka.start}">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <label for="meta">Meta</label>
+                <input type="text" class="form-control" id="meta" th:field="*{Wycieczka.meta}">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <label for="miejscowosc">Miejscowosc</label>
+                <input type="text" class="form-control" id="miejscowosc" th:field="*{Wycieczka.miejscowosc}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <label for="data">Data</label>
+                <<input type="text" class="form-control" id="data" name="data" th:field="*{Wycieczka.dataWycieczki}">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <label for="liczbaDni">Ile dni</label>
+                <input type="number" class="form-control" id="liczbaDni" th:field="*{Wycieczka.liczbaDni}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <label for="liczbaKilometrow">Ile Kilometrów</label>
+                <input type="number" class="form-control" id="liczbaKilometrow" th:field="*{Wycieczka.liczbaKilometrow}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+<footer>
+    <p style="text-align: center">Pozdrawiam i polecam, Jakub Korytek</p>
+</footer>
+</html>
